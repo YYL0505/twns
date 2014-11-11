@@ -1,0 +1,140 @@
+body .body{
+  margin-left: 100px;
+}
+
+body header{
+  font-size: 16pt;
+  background-color: lightgray;
+  padding-left:100px;
+}
+
+body header .header-left{
+  float: left;
+}
+
+body header .header-left a{
+  color: blue;
+}
+
+body header .header-right{
+  margin-left: 1000px;
+}
+
+body .body .body-top{
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+body .body .body-top .body-top-left{
+  float: left;
+  background-color: lightgray;
+  width: 170px;
+  height: 400px;
+  padding-left: 30px;
+}
+
+body .body .body-top .body-top-left p{
+  padding-top: 30px;
+}
+
+body .body .body-top .body-top-middle img{
+  float: left;
+  height: 400px;
+  margin-left: 50px;
+}
+
+body .body .body-top .body-top-right{
+  float: left;
+  margin-left: 100px;
+  width: 300px;
+}
+body .body .body-top .body-top-right p{
+  text-align: right;
+}
+
+body .body .body-middle,.body-bottom{
+  clear: left;
+  padding-top: 20px;
+}
+
+body .body hr{
+  margin-top: -25px;
+  height: 0px;
+  border-color: #000000;
+}
+
+body .body .flag,.name{
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+body .body .price{
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+body .body .body-middle img{
+  height: 300px;
+}
+
+body .body .body-middle .body-middle-left{
+  float: left;
+  text-align: center;
+}
+
+body .body .body-middle .body-middle-middle,.body-middle-right{
+  float: left;
+  margin-left: 50px;
+  text-align: center;
+}
+
+body .body .body-bottom img{
+  height: 250px;
+}
+
+body .body .body-bottom .body-bottom-left{
+  float: left;
+  text-align: center;
+}
+
+body .body .body-bottom .body-bottom-middle,.body-bottom-right{
+  float: left;
+  margin-left: 50px;
+  text-align: center;
+}
+
+body footer{
+  clear: left;
+
+}
+
+body footer .bottom{
+  background-color: lightgray;
+  height: 300px;
+  /*margin-top: 200px;*/
+}
+
+body footer .footer-left{
+  width: 500px;
+  padding-left:100px;
+}
+
+body footer div .footer-left,.footer-right{
+  float: left;
+}
+
+
+body footer p{
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+body footer li{
+  font-weight: bold;
+  font-size: 14pt;
+}
+
+body footer .footer-right img{
+  width: 400px;
+}
