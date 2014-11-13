@@ -2,58 +2,61 @@ body .body{
   margin-left: 100px;
 }
 
-body header{
+body header .header-top{
   font-size: 16pt;
   background-color: lightgray;
   padding-left:100px;
 }
 
-body header .header-left{
+body header .header-top-left{
   float: left;
 }
 
-body header .header-left a{
+body header .header-top-left a{
   color: blue;
 }
 
-body header .header-right{
+body header .header-top-right{
   margin-left: 1000px;
 }
 
-body .body .body-top{
+body header .header-bottom{
+  float: left;
   margin-top: 20px;
+  margin-left: 100px;
   font-weight: bold;
   font-size: 18pt;
 }
 
-body .body .body-top .body-top-left{
+body header .header-bottom .header-bottom-left,.header-bottom-middle,.header-bottom-right{
   float: left;
+}
+
+body header .header-bottom .header-bottom-left{
   background-color: lightgray;
   width: 170px;
   height: 400px;
   padding-left: 30px;
 }
 
-body .body .body-top .body-top-left p{
+body header .header-bottom .header-bottom-left p{
   padding-top: 30px;
 }
 
-body .body .body-top .body-top-middle img{
-  float: left;
+body header .header-bottom .header-bottom-middle img{
   height: 400px;
   margin-left: 50px;
 }
 
-body .body .body-top .body-top-right{
-  float: left;
+body header .header-bottom .header-bottom-right{
   margin-left: 100px;
   width: 300px;
 }
-body .body .body-top .body-top-right p{
+body header .header-bottom .header-bottom-right p{
   text-align: right;
 }
 
-body .body .body-middle,.body-bottom{
+body .body .body-top,.body-middle,.body-bottom{
   clear: left;
   padding-top: 20px;
 }
@@ -74,8 +77,29 @@ body .body .price{
   font-size: 16pt;
 }
 
-body .body .body-middle img{
+body .body .body-top .body-top-middle,.body-top-right{
+  float: left;
+  margin-left: 50px;
+  text-align: center;
+}
+
+body .body .body-top img{
   height: 300px;
+}
+
+body .body .body-top .body-top-left{
+  float: left;
+  text-align: center;
+}
+
+body .body .body-top .body-top-midddle,.body-top-right{
+  float: left;
+  text-align: center;
+  margin-left: 50px;
+}
+
+body .body .body-middle img{
+  height: 220px;
 }
 
 body .body .body-middle .body-middle-left{
@@ -85,8 +109,8 @@ body .body .body-middle .body-middle-left{
 
 body .body .body-middle .body-middle-middle,.body-middle-right{
   float: left;
-  margin-left: 50px;
   text-align: center;
+  margin-left: 50px;
 }
 
 body .body .body-bottom img{
