@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta name="name" content="content" charset="UTF-8">
+    <title>测试自己编写的map和fliter</title>
+
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="underscore-min.js"></script>
+  <script charset="utf-8">
+    $(document).ready(function(){
+      function map(arr, fn)
+      {
+        var result=[];
+        for(var i=0; i<arr.length; i++)
+          {
+            result.push(fn(arr[i]));
+          }
+        return result;
+      };
+
+      function fliter(arr, fn)
+      {
+        var result=[];
+        for(var i=0; i<arr.length; i++)
+          {
+            if(fn(arr[i]))
+              {
+                result.push(arr[i]);
+              }
+          }
+        return result;
+      };
+
+      var arr1=[1, 2, 3];
+      console.log(map(arr1, function(ele){return 2*ele;}));
+      console.log(fliter(arr1, function(ele){return ele>1;}));
+    });
+  </script>
+
+</head>
+  <body>
+
+  </body>
+</html>
