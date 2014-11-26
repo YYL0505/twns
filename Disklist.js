@@ -1,18 +1,5 @@
 $(document).ready(function(){
   dataToView(disks);
-  $('.disk1').mouseenter(function(){
-    $('#'+this.id+' > button').removeAttr('disabled');
-
-  })
-  .mouseleave(function(){
-    $('#'+this.id+' > button').attr('disabled', 'true');
-  });
-
-  $('.disk1 > button').click(function(){
-    var start=parseInt(this.id.charAt(this.id.length-1));
-    disks.splice(start-1, 1);
-    dataToView(disks);
-  });
 });
 
 function dataToView(disks)
@@ -26,6 +13,26 @@ function dataToView(disks)
   _.each(diskDivs, function(div){
     $('#container').append(div);
   });
+
+  $('.disk1').mouseenter(function(){
+    $('#'+this.id+' > button').show();
+  })
+  .mouseleave(function(){
+    $('#'+this.id+' > button').hide();
+  });
+
+  $('.disk1 > .delbtn').click(function(){
+    var start=parseInt(this.id.charAt(this.id.length-1));
+    disks.splice(start-1, 1);
+    dataToView(disks);
+  });
+
+  $('.disk1 > .updbtn').click(function(){
+    //console.log('update');
+    //进去另一个页面
+    var start=parseInt(this.id.charAt(this.id.length-1))-1;
+    window.location.href="update.html?flag="+start;
+  });
 };
 
 function diskDiv(disk)
@@ -35,10 +42,12 @@ function diskDiv(disk)
   return $("<div>")
     .attr("class", 'disk1')
     .attr('id', id)
+    .attr('style', 'margin-left: 20px')
     .append(diskTitle(disk.name))
     .append(diskImg(disk.img))
     .append(diskDesc(disk.desc))
-    .append(diskBtn());
+    .append(diskDelBtn())
+    .append(diskUpdBtn());
 };
 
 function diskTitle(title)
@@ -56,12 +65,20 @@ function diskDesc(desc)
   return $('<p>').html(desc);
 }
 
-function diskBtn()
+function diskDelBtn()
 {
-  var id='btn'+divNums;
+  var id='delbtn'+divNums;
   return $('<button>').html('delete')
     .attr('id', id)
-    .attr('disabled', 'true');
+    .attr('class', 'delbtn').hide();
+}
+
+function diskUpdBtn()
+{
+  var id='updbtn'+divNums;
+  return $('<button>').html('update')
+    .attr('id', id)
+    .attr('class', 'updbtn').hide();
 }
 
 function add()
