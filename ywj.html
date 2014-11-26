@@ -1,4 +1,4 @@
-<html>
+﻿<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>YWJ的商店</title>
@@ -61,14 +61,3 @@
     <br/>
   </body>
 </html>
-
-
-
-function deletePro()
-{
-  var keyword=$('#delete').val();
-  var deleteResult=_.filter(disks, function(disk){
-    return disk.name != keyword;
-  });
-  dataToView(deleteResult);
-}
