@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.nightschool.controller.DiskControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2014-12-20T07:20:48" hostname="Thoughtworks.local" time="0.019">
+<testsuite name="org.nightschool.controller.DiskControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2014-12-26T03:15:22" hostname="Thoughtworks.local" time="0.074">
   <properties/>
-  <testcase name="test_list_disks_is_not_empty" classname="org.nightschool.controller.DiskControllerTest" time="0.011"/>
+  <testcase name="test_list_disks_is_not_empty" classname="org.nightschool.controller.DiskControllerTest" time="0.072"/>
   <testcase name="test_list_disks_is_empty" classname="org.nightschool.controller.DiskControllerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

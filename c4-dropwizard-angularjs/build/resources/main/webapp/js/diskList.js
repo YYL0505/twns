@@ -74,7 +74,6 @@ function add() {
         contentType: "application/json",
         success : function (result) {
             listDisks();
-            console.log(result);
         }
     });
 }

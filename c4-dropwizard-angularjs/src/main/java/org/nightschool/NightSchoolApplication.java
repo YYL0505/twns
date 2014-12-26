@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.nightschool.controller.CartController;
 import org.nightschool.controller.DiskController;
 
 public class NightSchoolApplication extends Application<NightSchoolConfiguration> {
@@ -31,6 +32,8 @@ public class NightSchoolApplication extends Application<NightSchoolConfiguration
         );
         environment.jersey().register(resource);//将resource
         environment.jersey().register(new DiskController());
+        environment.jersey().register(new CartController());
+
     }
 
 }
