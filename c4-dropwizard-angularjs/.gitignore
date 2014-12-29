@@ -1,0 +1,7 @@
+.keep
+.DS_store
+target/*
+.idea
+.gradle
+build/*
+
