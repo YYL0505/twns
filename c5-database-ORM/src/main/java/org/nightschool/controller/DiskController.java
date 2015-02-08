@@ -17,7 +17,7 @@ public class DiskController {
     private final DiskDao diskDao = new DiskDao();
 
     @GET
-    public List<Disk> list() {
+    public ArrayList<Disk> list() {
         return diskDao.listDisks();
     }
 
@@ -29,8 +29,8 @@ public class DiskController {
     }
 
     @DELETE
-    @Path("remove/{id}")
-    public void remove(@PathParam("id") int index) {
-        diskDao.remove(index);
+    @Path("remove/{name}")
+    public void remove(@PathParam("name") String name) {
+        diskDao.remove(name);
     }
 }

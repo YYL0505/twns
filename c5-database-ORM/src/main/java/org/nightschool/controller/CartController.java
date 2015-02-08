@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class CartController {
     CartDao cartDao = new CartDao();
 
     @GET
-    public List<Disk> list(){
+    public ArrayList<Disk> list(){
         return cartDao.cartList();
     }
 
@@ -26,6 +27,7 @@ public class CartController {
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
     public void add(Disk disk) {
+        System.out.print("@@@@@@@@@@@@@@@@@@");
         cartDao.add(disk);
     }
 }

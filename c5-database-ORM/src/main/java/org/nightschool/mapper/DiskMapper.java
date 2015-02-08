@@ -10,18 +10,21 @@ import java.util.List;
  */
 public interface DiskMapper {
 
-    @Select("select * from item")
+    @Select("select * from disks")
     public List<Disk> getDisks();
 
-    @Insert("insert into item(name,img_url,description,price,count) values(#{name}, #{imgUrl}, #{desc}, #{price}, #{number})")
+    @Insert("insert into disks(name,img_url,description,price,count) values(#{name}, #{img_url}, #{description}, #{price}, #{count})")
     public void insertDisk(Disk disk);
 
-    @Update("update item set name=#{newName} where name=#{oldName}")
+    @Update("update disks set name=#{newName} where name=#{oldName}")
     public void updateDisk(@Param("oldName") String oldName, @Param("newName") String newName);
 
-    @Select("select * from item where name=#{name}")
+    @Select("select * from disks where name=#{name}")
     public List<Disk> getDiskByName(String name);
 
-    @Delete("delete from item where name=#{name}")
-    public void deleteDiskByName(String name);
+    @Delete("delete from disks where name=#{name}")
+    public void deleteDiskByName(@Param("name") String name);
+
+    @Delete("delete from disks where id=#{index}")
+    public void deleteDiskByIndex(int index);
 }

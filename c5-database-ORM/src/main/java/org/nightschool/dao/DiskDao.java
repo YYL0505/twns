@@ -1,31 +1,70 @@
 package org.nightschool.dao;
 
+import org.apache.ibatis.session.SqlSession;
+import org.nightschool.demo.MybatisUtils;
+import org.nightschool.mapper.DiskMapper;
 import org.nightschool.model.Disk;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Thoughtworks on 12/26/14.
  */
 public class DiskDao {
-    ArrayList<Disk> disks = new ArrayList<>();
+    private SqlSession session;
+    private DiskMapper diskMapper;
+
 
     public DiskDao() {
-        disks.add(new Disk("小清新光盘", "../images/disk/fancy-disk.jpg", "小清新、小文艺 35元/10张", 0, 3.5));
-        disks.add(new Disk("婚庆光盘", "../images/disk/marriage-disk.jpg", "记录你的美好瞬间 50元/10张", 0, 5.0));
-        disks.add(new Disk("1TB大容量光盘", "../images/disk/1TB-disk.jpg", "解放你的硬盘  100元/10张", 0, 10.0));
+        session = MybatisUtils.getFactory().openSession();
+        diskMapper = session.getMapper(DiskMapper.class);
     }
 
-    public List<Disk> listDisks() {
+    public ArrayList<Disk> listDisks() {
+        ArrayList<Disk> disks = new ArrayList<>();
+
+        try {
+            disks = (ArrayList)diskMapper.getDisks();
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
         return disks;
     }
 
     public void add(Disk disk) {
-        disks.add(disk);
+
+        try {
+            diskMapper.insertDisk(disk);
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
     }
 
-    public void remove(int index) {
-        disks.remove(index);
+    public void remove(String name) {
+        try {
+            diskMapper.deleteDiskByName(name);
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
+    }
+
+    public ArrayList<Disk> getDisksByName(String name) {
+        ArrayList<Disk> disks = new ArrayList<>();
+
+        try {
+            disks = (ArrayList<Disk>)diskMapper.getDiskByName(name);
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
+
+        return disks;
     }
 }

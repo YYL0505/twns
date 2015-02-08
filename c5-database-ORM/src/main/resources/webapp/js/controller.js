@@ -4,9 +4,9 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
 
   $scope.isList = true;
   $scope.isCart = false;
-  $scope.number = 10;
+  $scope.count = 10;
   $scope.totalPrice = 0.0;
-  $scope.disk = {price:10.0, number:0}
+  $scope.disk = {price:10.0, count:0}
 
 
   $scope.init = function(){
@@ -17,19 +17,13 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
   $scope.goToCart = function() {
     $scope.isList = false;
     $scope.isCart = true;
-
-    $http({
-      method: 'GET',
-      url: '/cart'
-          }).success(function(data) {
-            $scope.cart = data;
-          }).error(function(error) {
-    });
+    getCart();
   };
 
   $scope.goToList = function() {
       $scope.isList = true;
       $scope.isCart = false;
+      getDisks();
   };
 
 
@@ -48,7 +42,7 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
   $scope.removeDisk = function(disk) {
     $http({
       method: 'DELETE',
-      url: '/disks/remove/' + getIndexOfDisk(disk)
+      url: '/disks/remove/' + disk.name
     }).success(function(){
       getDisks();
     });
@@ -56,7 +50,7 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
   };
 
   $scope.addToCart = function(disk) {
-    disk.number = $scope.number;
+    disk.count = $scope.count;
     $http({
       method: 'POST',
       url: '/cart/add',
@@ -82,10 +76,10 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
       $('.check-all')[0].checked = false;
     }
 
-    $scope.caculateTotalPrice();
+    $scope.calculateTotalPrice();
   };
 
-  $scope.caculateTotalPrice = function() {
+  $scope.calculateTotalPrice = function() {
     var checkBoxes = $(".check-self");
 
     $scope.totalPrice = 0.0;
@@ -93,7 +87,7 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
       {
         if(checkBoxes[i].checked)
           {
-            $scope.totalPrice += $scope.cart[i].number * $scope.cart[i].price;
+            $scope.totalPrice += $scope.cart[i].count * $scope.cart[i].price;
           }
       }
     };
@@ -109,6 +103,16 @@ angular.module('DiskApp',[]).controller("DisksListCtrl", function($scope, $http,
         }).success(function(data) {
           $scope.disks = data;
         }).error(function(error) {
+    });
+  };
+
+  function getCart() {
+    $http({
+      method: 'GET',
+      url: '/cart'
+          }).success(function(data) {
+            $scope.cart = data;
+          }).error(function(error) {
     });
   };
 });
