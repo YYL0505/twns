@@ -14,13 +14,14 @@
 <div class="container">
     <nav>
         <div class="align-left">
-            <a href="" ng-click="clickLogin()">登陆</a>
-            <a href="" ng-click="clickRegister()">注册</a>
         </div>
         <div class="align-right">
-            <a href="">我的订单</a>
-            <a href="javascript:void(0)" ng-click="goToCart()" ng-show="isList">购物车</a>
-            <a href="javascript:void(0)" ng-click="goToList()" ng-show="isCart">返回</a>
+            <a href="login.html" ng-show="!user">亲,请登录</a>
+            <a href="register.html" ng-show="!user">免费注册</a>
+            <a href="" ng-click="" ng-show="user">{{user}}</a>
+            <a href="" ng-click="clickRegister()" ng-show="isManager">商品管理</a>
+            <a href="javascript:void(0)" ng-click="goToCart()" ng-show="!isManager&&isList">购物车</a>
+            <a href="javascript:void(0)" ng-click="goToList()" ng-show="!isManager&&isCart">返回</a>
         </div>
     </nav>
     <section>
@@ -47,7 +48,7 @@
         <table>
             <tr>
                 <th class="td-checkbox">
-                    <input type="checkbox" class="check-all" ng-model="master" ng-click="calculateTotalPrice()">
+                    <input type="checkbox" class="check-all" ng-model="master" ng-click="caculateTotalPrice()">
                 </th>
 
                 <th class="td-name">
@@ -77,7 +78,7 @@
                 </td>
 
                 <td class="td-number">
-                    {{disk.count}}
+                    {{disk.number}}
                 </td>
 
                 <td class="td-price">
@@ -85,7 +86,7 @@
                 </td>
 
                 <td class="td-amount">
-                    {{disk.price * disk.count}}
+                    {{disk.price * disk.number}}
                 </td>
             </tr>
         </table>
@@ -100,8 +101,8 @@
         </header>
         <div>
             <input placeholder="商品名" id="name" ng-model="disk.name"/>
-            <input placeholder="图片链接" id="img_url" ng-model="disk.img_url"/>
-            <input placeholder="商品详情" id="description" ng-model="disk.description"/>
+            <input placeholder="图片链接" id="imgUrl" ng-model="disk.imgUrl"/>
+            <input placeholder="商品详情" id="desc" ng-model="disk.desc"/>
             <button ng-click="addDisk()">add</button>
             <br>
             <input placeholder="请输入搜索关键字" id="search" ng-model="key"/>
@@ -111,15 +112,15 @@
                 <p>
                     {{disk.name}}
                 </p>
-                <img ng-src={{disk.img_url}}>
+                <img ng-src={{disk.imgUrl}}>
 
                 <p>
-                    {{disk.description}}
+                    {{disk.desc}}
                 </p>
 
                 <div>
                     <label>单价: {{disk.price}} 元</label>
-                    数量: <input type="text" placeholder=10 ng-model="count">
+                    数量: <input type="text" placeholder=10 ng-model="number">
                 </div>
 
                 <div>
@@ -127,6 +128,7 @@
                     <button ng-click="addToCart(disk)">add to cart</button>
                 </div>
             </div>
+        </div>
     </section>
     <footer>
         <div class="left">
