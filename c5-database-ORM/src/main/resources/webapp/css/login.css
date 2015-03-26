@@ -1,0 +1,13 @@
+table {
+    border: 2px solid #dedede;
+    width: 320px;
+    height: 340px;
+}
+
+tr {
+    align: ;
+}
+
+.operate-row {
+    colspan: 2;
+}

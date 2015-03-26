@@ -67,4 +67,24 @@ public class DiskDao {
 
         return disks;
     }
+
+    public void setCount(int id, int count) {
+        try {
+            diskMapper.setCountByName(id, count);
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
+    }
+
+    public void updateDisk(Disk disk) {
+        try {
+            diskMapper.updateDisk(disk);
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
+    }
 }

@@ -33,4 +33,20 @@ public class DiskController {
     public void remove(@PathParam("name") String name) {
         diskDao.remove(name);
     }
+
+    @POST
+    @Path("setCount/{id}")
+    public void setCount(@PathParam("id") int id, int count) {
+        diskDao.setCount(id, count);
+    }
+
+    @POST
+    @Path("update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ArrayList<Disk> update(Disk disk) {
+        diskDao.updateDisk(disk);
+        return diskDao.listDisks();
+
+    }
+
 }

@@ -24,26 +24,22 @@ public class CartDao {
     }
 
 
-    public void add(Disk disk) {
+    public void add(Disk disk, String user_name) {
 
         try {
-            cart = cartMapper.getCart();
+            cart = cartMapper.getCart(user_name);
             int i = 0;
             for(i = 0; i < cart.size(); i++)
-            {
-                if(cart.get(i).getName().equals(disk.getName())) {
+                if(cart.get(i).getName().equals(disk.getName()))
                     break;
-                }
-            }
 
-            if(i == cart.size()) {
-                cartMapper.insertDisk(disk);
-            }
-            else {
-                cartMapper.setDisksNumber(i + 1, cart.get(i).getCount() + disk.getCount());
-            }
+            if(i == cart.size())
+                cartMapper.insertDisk(disk.getName(), disk.getPrice(), disk.getCount(), user_name);
+            else
+                cartMapper.setDisksNumber(disk.getName(), user_name, cart.get(i).getCount() + disk.getCount());
 
         } catch (Exception e) {
+            System.out.println(e);
             session.rollback();
         } finally {
             session.commit();
@@ -51,10 +47,10 @@ public class CartDao {
 
     }
 
-    public ArrayList<Disk> cartList() {
+    public ArrayList<Disk> cartList(String user_name) {
 
         try {
-            cart = cartMapper.getCart();
+            cart = cartMapper.getCart(user_name);
         } catch (Exception e) {
             session.rollback();
         } finally {
@@ -62,5 +58,15 @@ public class CartDao {
         }
 
         return cart;
+    }
+
+    public void removeDisk(int id) {
+        try {
+            cartMapper.removeDisk(id);
+        } catch (Exception e) {
+            session.rollback();
+        } finally {
+            session.commit();
+        }
     }
 }

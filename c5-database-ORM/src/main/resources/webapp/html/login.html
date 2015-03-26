@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="DiskApp"  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/vendor/angular.min.js"></script>
+    <script src="../js/vendor/jquery-2.1.1.js"></script>
+    <script src="../js/user.js"></script>
+    <script src="../js/vendor/underscore-1.7.0.js"></script>
+    <title>Login</title>
+</head>
+<body ng-controller="UserCtrl">
+    <form>
+        <table>
+            <tr id="errorField" ng-show="isError">
+                <td>
+                    {{errorMessage}}
+                </td>
+            </tr>
+            <tr>
+                <td>用户名:</td>
+                <td><input type="text" name="username"  id="username" ng-model="user.user_name"></td>
+            </tr>
+            <tr>
+                <td>密 码:</td>
+                <td><input type="password" name="password" id="password" ng-model="user.password"></td>
+            </tr>
+            <tr class="operate-row">
+                <td>
+                    <input id="submit-btn" type="button" value="登 录" ng-click="login()"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

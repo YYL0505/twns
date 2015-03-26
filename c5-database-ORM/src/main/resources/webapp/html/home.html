@@ -14,12 +14,14 @@
 <div class="container">
     <nav>
         <div class="align-left">
+            <a href="home.html">LOGO</a>
         </div>
         <div class="align-right">
             <a href="login.html" ng-show="!user">亲,请登录</a>
             <a href="register.html" ng-show="!user">免费注册</a>
             <a href="" ng-click="" ng-show="user">{{user}}</a>
-            <a href="" ng-click="clickRegister()" ng-show="isManager">商品管理</a>
+            <a href="javascript:void(0)" ng-click="goToEditing()" ng-show="isManager&&!editing">商品管理</a>
+            <a href="javascript:void(0)" ng-click="goToEdited()" ng-show="isManager&&editing">返回</a>
             <a href="javascript:void(0)" ng-click="goToCart()" ng-show="!isManager&&isList">购物车</a>
             <a href="javascript:void(0)" ng-click="goToList()" ng-show="!isManager&&isCart">返回</a>
         </div>
@@ -48,7 +50,7 @@
         <table>
             <tr>
                 <th class="td-checkbox">
-                    <input type="checkbox" class="check-all" ng-model="master" ng-click="caculateTotalPrice()">
+                    <input type="checkbox" class="check-all" ng-model="master" ng-click="calculateTotalPrice()">
                 </th>
 
                 <th class="td-name">
@@ -78,7 +80,7 @@
                 </td>
 
                 <td class="td-number">
-                    {{disk.number}}
+                    {{disk.count}}
                 </td>
 
                 <td class="td-price">
@@ -86,12 +88,18 @@
                 </td>
 
                 <td class="td-amount">
-                    {{disk.price * disk.number}}
+                    {{disk.price * disk.count}}
+                </td>
+                <td>
+                    <a href="javascript:void(0)" ng-click="removeDiskFromCart(disk.id)">移除购物车</a>
                 </td>
             </tr>
         </table>
-        <p id="totalPrice">
-            当前所选商品的总价: {{totalPrice}}元
+        <p id="operations">
+            <span><a href="javascript:void(0)" ng-click="removeDisksFromCart()">移除购物车</a></span>
+            <span>已选件数: {{totalCount}}</span>
+            <span id="totalPrice">合计: {{totalPrice}}元</span>
+            <span><a href="" ng-click="payBill()">结算</a></span>
         </p>
     </div>
     <section id="showMessage" ng-show="isList">
@@ -100,31 +108,76 @@
             <hr>
         </header>
         <div>
-            <input placeholder="商品名" id="name" ng-model="disk.name"/>
-            <input placeholder="图片链接" id="imgUrl" ng-model="disk.imgUrl"/>
-            <input placeholder="商品详情" id="desc" ng-model="disk.desc"/>
-            <button ng-click="addDisk()">add</button>
             <br>
             <input placeholder="请输入搜索关键字" id="search" ng-model="key"/>
         </div>
-        <div class="content" id="disks">
+        <div ng-show="editing">
+            <button ng-show="!addDisking" ng-click="goToAddDisk()">发布宝贝</button>
+            <button ng-show="addDisking" ng-click="goToEdit()">返回</button>
+            <div ng-show="addDisking">
+                <input placeholder="商品名" id="name" ng-model="disk.name"/>
+                <input placeholder="图片链接" id="imgUrl" ng-model="disk.img_url"/>
+                <input placeholder="商品详情" id="desc" ng-model="disk.description"/>
+                <input placeholder="商品单价" id="price" ng-model="disk.price"/>
+                <input placeholder="商品库存" id="count" ng-model="disk.count"/>
+                <button ng-click="addDisk()">add</button>
+            </div>
+            <div ng-show="!addDisking">
+                <div class="sort">
+                    <ul>
+                        <li><a href="">库存</a></li>
+                        <li><a href="">单价</a></li>
+                    </ul>
+                </div>
+                <table>
+                    <tr>
+                        <td>商品名</td>
+                        <td>商品详情</td>
+                        <td>商品单价</td>
+                        <td>商品库存量</td>
+                        <td>编辑</td>
+                    </tr>
+                    <tr ng-repeat="disk in disks | filter: key">
+                        <td>{{disk.name}}</td>
+                        <td>{{disk.description}}</td>
+                        <td>{{disk.price}}</td>
+                        <td>{{disk.count}}</td>
+                        <td><a href="" ng-click="updateDisk()">编辑</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-show="update">
+                <label for="disk-name"></label>
+                <input id="disk-name" placeholder="disk.name" ng-model="disk.name"/>
+                <label for="disk-img"></label>
+                <input id="disk-img" placeholder="disk.img_url" ng-model="disk.img_url"/>
+                <label for="disk-desc"></label>
+                <input id="disk-desc" placeholder="disk.description" ng-model="disk.description"/>
+                <label for="disk-price"></label>
+                <input id="disk-price" placeholder="disk.price" ng-model="disk.price"/>
+                <label for="disk-count"></label>
+                <input id="disk-count" placeholder="disk.count" ng-model="disk.count"/>
+                <button ng-click="updateDisk(disk)">update</button>
+            </div>
+        </div>
+        <div class="content" id="disks" ng-show="!editing">
             <div class="item" ng-repeat="disk in disks | filter: key">
                 <p>
                     {{disk.name}}
                 </p>
-                <img ng-src={{disk.imgUrl}}>
+                <img ng-src={{disk.img_url}}>
 
                 <p>
-                    {{disk.desc}}
+                    {{disk.description}}
                 </p>
 
                 <div>
                     <label>单价: {{disk.price}} 元</label>
-                    数量: <input type="text" placeholder=10 ng-model="number">
+                    数量: <input type="text" placeholder=10 ng-model="count">
                 </div>
 
                 <div>
-                    <button ng-click="removeDisk(disk)">remove</button>
+                    <button ng-click="removeDisk(disk)" ng-show="editing">remove</button>
                     <button ng-click="addToCart(disk)">add to cart</button>
                 </div>
             </div>

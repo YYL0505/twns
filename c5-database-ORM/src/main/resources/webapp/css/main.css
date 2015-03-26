@@ -103,16 +103,21 @@ table tbody tr{
 }
 
 table .td-checkbox, .td-number, .td-price, .td-amount{
-  width: 15%;
+  width: 12%;
 }
 
 table .td-name{
   width: 40%;
 }
 
-#totalPrice{
+#operations {
   float:right;
   margin-right: 10%;
+}
+
+
+#operations span {
+  margin-right: 10px;
 }
 
 footer {

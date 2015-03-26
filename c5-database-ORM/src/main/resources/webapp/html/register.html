@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="DiskApp"  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/vendor/angular.min.js"></script>
+    <script src="../js/vendor/jquery-2.1.1.js"></script>
+    <script src="../js/user.js"></script>
+    <script src="../js/vendor/underscore-1.7.0.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <title>Register</title>
+</head>
+<body ng-controller="UserCtrl"  ng-init="init()">
+<form name="userRegForm" class="form-group">
+    <table>
+        <tr id="errorField" ng-show="isError">
+            <td>
+                {{errorMessage}}
+            </td>
+        </tr>
+        <tr   class="has-warning">
+            <td>用户名:</td>
+            <span ng-if="userRegForm.username.$error.required">shit</span>
+            <td><input type="text" name="username" id="username" ng-model="user.user_name" required ng-blur="userNameValid()"></td>
+        </tr>
+        <tr>
+            <td>密 码:</td>
+            <td><input type="password" name="password" id="password" ng-model="user.password" ng-blur="passwordValid()"></td>
+        </tr>
+        <tr>
+            <td>确认密码:</td>
+            <td><input type="password" ng-model="password" ng-blur="rePasswordValid()"></td>
+        </tr>
+        <tr class="operate-row">
+            <td>
+                <input id="submit-btn" type="button" class="btn btn-danger" value="登 录" ng-click="register()" ng-disabled="userRegForm.username.$error.required"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
